@@ -1,0 +1,37 @@
+{
+    "name": "woit/wit-loremipsum",
+    "type": "typo3-cms-extension",
+    "description": "Ckeditor dummy lorem ipsum text.",
+    "keywords": [
+        "TYPO3",
+        "extension",
+        "news",
+        "woit",
+        "loremipsum"
+    ],
+    "homepage": "https://extensions.typo3.org/extension/wit_loremipsum",
+    "authors": [
+        {
+            "name": "Team WebofficeIT, Rahul R S",
+            "email": "info@webofficeit.com",
+            "role": "Developer"
+        }
+    ],
+    "support": {
+       "source": "https://github.com/webofficeit-official/wit_loremipsum"
+    },
+    "license": "GPL-2.0-or-later",
+    "require": {
+        "typo3/cms-core": "^12"
+    },
+    "autoload": {
+        "psr-4": {
+            "Woit\\WitLoremipsum\\": "Classes"
+        }
+    },
+    "extra": {
+        "typo3/cms": {
+            "extension-key": "wit_loremipsum"
+        }
+    }
+}
