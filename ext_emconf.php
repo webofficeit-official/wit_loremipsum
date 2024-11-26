@@ -9,10 +9,10 @@ $EM_CONF[$_EXTKEY] = [
     'author_company' => 'Weboffice Infotech India Pvt. Ltd.',
     'state' => 'stable',
     'clearCacheOnLoad' => 0,
-    'version' => '1.0.1',
+    'version' => '1.0.2',
     'constraints' => [
         'depends' => [
-            'typo3' => '12.4.0-12.9.99',
+            'typo3' => '12.4.0-13.9.99',
         ],
         'conflicts' => [],
         'suggests' => [],
