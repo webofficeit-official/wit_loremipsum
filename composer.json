@@ -1,13 +1,16 @@
 {
     "name": "woit/wit-loremipsum",
     "type": "typo3-cms-extension",
-    "description": "Ckeditor dummy lorem ipsum text.",
+    "description": "Toolbar button for the TYPO3 CKEditor that inserts dummy text: Lorem Ipsum or German Blindtext, as sentence, paragraphs, list or heading.",
     "keywords": [
         "TYPO3",
         "extension",
+        "CKEditor",
+        "dummy text",
+        "lorem ipsum",
+        "blindtext",
         "WIT",
-        "woit",
-        "loremipsum"
+        "woit"
     ],
     "homepage": "https://extensions.typo3.org/extension/wit_loremipsum",
     "authors": [

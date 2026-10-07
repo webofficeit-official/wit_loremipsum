@@ -1,4 +1,6 @@
-# TYPO3 Extension `wit_loremipsum`
+# Dummy Text for CKEditor
+
+TYPO3 extension `wit_loremipsum`
 
 Adds a **dummy text** button to the CKEditor 5 toolbar of the TYPO3 Rich Text Editor (RTE).
 Editors choose the kind of dummy text from a dropdown and it is inserted at the current cursor position. This helps editors
@@ -158,11 +160,18 @@ editor:
 
 ## Changelog
 
+### 2.1.1
+
+- New title "Dummy Text for CKEditor"
+- New extension icon
+- Updated description and keywords
+
 ### 2.1.0
 
 - Toolbar dropdown with five variants: sentence, paragraph, three paragraphs, bulleted list, heading with text
 - German dummy text for German content, based on the record language from the site configuration
 - Icon in the toolbar and German/English labels
+- Cursor inside existing text: dummy text is added as new block(s) after the current block
 - Restrict the button to application contexts (e.g. not in production) and backend user groups
 
 ### 2.0.0
