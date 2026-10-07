@@ -18,16 +18,13 @@
         }
     ],
     "support": {
-       "source": "https://github.com/webofficeit-official/wit_loremipsum"
+        "source": "https://github.com/webofficeit-official/wit_loremipsum"
     },
     "license": "GPL-2.0-or-later",
     "require": {
-        "typo3/cms-core": "^12"
-    },
-    "autoload": {
-        "psr-4": {
-            "Woit\\WitLoremipsum\\": "Classes"
-        }
+        "php": "^8.2",
+        "typo3/cms-core": "^14.0",
+        "typo3/cms-rte-ckeditor": "^14.0"
     },
     "extra": {
         "typo3/cms": {

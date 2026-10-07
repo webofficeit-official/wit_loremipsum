@@ -1,0 +1,6 @@
+# Registers the Lorem Ipsum CKEditor plugin.
+# Import this file in your own RTE preset and add "loremIpsum" to editor.config.toolbar.items
+editor:
+  config:
+    importModules:
+      - { module: '@woit/wit-loremipsum/lorem-ipsum.js', exports: ['LoremIpsum'] }

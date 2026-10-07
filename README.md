@@ -20,12 +20,27 @@ Default Configuration: The extension seamlessly integrates into the default TYPO
 
 Custom Presets: For users with custom RTE configurations, the extension supports easy integration. Replace "default" with your custom RTE configuration to tailor the experience to your specific needs.
 
+## Compatibility
+
+| Version | TYPO3 |
+|---------|-------|
+| 2.x     | 14    |
+| 1.x     | 12    |
+
 ## Adding to your own sitepackage
 
-For use dummy lorem ipsum, add the below code inside `ext_localconf.php`
+The extension sets the `default` RTE preset to `EXT:wit_loremipsum/Configuration/RTE/Default.yaml`
+(TYPO3 core default preset plus the Lorem Ipsum button).
 
-```php
-$GLOBALS['TYPO3_CONF_VARS']['RTE']['Presets']['default'] = 'EXT:wit_loremipsum/Configuration/RTE/Default.yaml';
+If you use your own RTE preset, import the plugin configuration and add the button to the toolbar:
+
+```yaml
+imports:
+    - { resource: "EXT:wit_loremipsum/Configuration/RTE/Plugin.yaml" }
+
+editor:
+  config:
+    toolbar:
+      items:
+        - loremIpsum
 ```
-
-replace `default` with your custom RTE configurations.
