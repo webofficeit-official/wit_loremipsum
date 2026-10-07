@@ -160,6 +160,10 @@ editor:
 
 ## Changelog
 
+### 2.1.2
+
+- Author in composer.json aligned with ext_emconf.php
+
 ### 2.1.1
 
 - New title "Dummy Text for CKEditor"
