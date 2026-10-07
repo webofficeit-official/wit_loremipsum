@@ -1,13 +1,15 @@
 # TYPO3 Extension `wit_loremipsum`
 
-Adds a **Lorem Ipsum** button to the CKEditor 5 toolbar of the TYPO3 Rich Text Editor (RTE).
-One click inserts a paragraph of dummy text at the current cursor position. This helps editors
+Adds a **dummy text** button to the CKEditor 5 toolbar of the TYPO3 Rich Text Editor (RTE).
+Editors choose the kind of dummy text from a dropdown and it is inserted at the current cursor position. This helps editors
 and integrators to fill content elements quickly when building or testing layouts.
 
 ## Features
 
-- "Lorem Ipsum" button in the CKEditor toolbar
-- Inserts the dummy text as a regular paragraph (`<p>`), which can be edited and formatted like any other text
+- Toolbar dropdown with icon: one sentence, one paragraph, three paragraphs, bulleted list, heading with text
+- Dummy text language follows the content language of the record: German "Blindtext" for German content, Lorem Ipsum for all other languages
+- Button labels in German or English, depending on the backend user language
+- Inserts regular paragraphs, headings and lists, which can be edited and formatted like any other text
 - Works out of the box with the TYPO3 `default` RTE preset
 - Can be added to any custom RTE preset with a single import
 
@@ -78,13 +80,59 @@ editor:
 `Configuration/RTE/Plugin.yaml` only loads the CKEditor plugin. It does not change the toolbar or
 any other setting of your preset.
 
+## Restrict access
+
+By default all backend users see the button in every application context. You can restrict it in
+**Admin Tools > Settings > Extension Configuration > wit_loremipsum**:
+
+| Setting | Description | Default |
+|---------|-------------|---------|
+| `allowedContexts` | Comma-separated application contexts, e.g. `Development,Testing`. Sub contexts like `Development/Local` are included. Empty = all contexts. | empty |
+| `allowedBackendGroups` | Comma-separated backend user group UIDs. Groups a user gets through subgroups count as well. Empty = all users. | empty |
+| `alwaysAllowAdmins` | Administrators see the button regardless of their groups. The context restriction still applies. | on |
+
+Both restrictions are combined: the button is shown only if the context **and** the user group are allowed.
+If the button is not allowed, it is removed from the toolbar and the plugin is not loaded. This works with
+every RTE preset, no separate presets are needed.
+
+Example: only show the button on development and staging systems, not in production:
+
+```php
+// config/system/additional.php
+$GLOBALS['TYPO3_CONF_VARS']['EXTENSIONS']['wit_loremipsum']['allowedContexts'] = 'Development,Testing';
+```
+
 ## Usage
 
 1. Open a content element with a rich text field (for example "Text") in the TYPO3 backend.
 2. Place the cursor where the text should go.
-3. Click **Lorem Ipsum** in the editor toolbar.
+3. Click the dummy text icon in the editor toolbar ("Insert dummy text" / "Blindtext einfügen").
+4. Choose the variant:
 
-The dummy text is inserted as a new paragraph.
+| Variant | Inserted content |
+|---------|------------------|
+| One sentence | One paragraph with one sentence |
+| One paragraph | One paragraph with five sentences |
+| Three paragraphs | Three paragraphs with five sentences each |
+| Bulleted list | Bulleted list with four items (plain paragraphs if lists are disabled in the preset) |
+
+If the cursor is inside existing text, the dummy text is added as new block(s) after the current block.
+An empty block or selected text is replaced. Each insert is one undo step.
+| Heading with text | Heading (`heading2`, otherwise `heading1` or `heading3`) and one paragraph |
+
+The dummy text language follows the language of the edited record as configured in the site
+configuration (German "Blindtext" for German, Lorem Ipsum for all other languages). This also works for
+records in the default language, no extra configuration is needed.
+
+Tip: TYPO3 sets the CKEditor content language (used e.g. for spell checking) of default language records
+to `editor.config.defaultContentLanguage` (fallback: `en-US`). If your default language is not English,
+also set it in your preset:
+
+```yaml
+editor:
+  config:
+    defaultContentLanguage: de
+```
 
 ## Upgrade from 1.x to 2.0
 
@@ -100,12 +148,22 @@ The dummy text is inserted as a new paragraph.
 | File | Purpose |
 |------|---------|
 | `ext_localconf.php` | Sets the `default` RTE preset |
+| `ext_conf_template.txt` | Extension settings for access restriction |
+| `Classes/EventListener/AddDummyTextLanguage.php` | Passes the record language from the site configuration to the plugin |
+| `Classes/EventListener/RestrictLoremIpsumButton.php` | Removes the button for contexts and user groups that are not allowed |
 | `Configuration/RTE/Default.yaml` | Core default preset plus Lorem Ipsum button |
 | `Configuration/RTE/Plugin.yaml` | Loads the CKEditor plugin, for use in custom presets |
 | `Configuration/JavaScriptModules.php` | Registers the ES module `@woit/wit-loremipsum/lorem-ipsum.js` |
-| `Resources/Public/JavaScript/Ckeditor/lorem-ipsum.js` | CKEditor 5 plugin with the toolbar button |
+| `Resources/Public/JavaScript/Ckeditor/lorem-ipsum.js` | CKEditor 5 plugin with the toolbar dropdown and the dummy texts |
 
 ## Changelog
+
+### 2.1.0
+
+- Toolbar dropdown with five variants: sentence, paragraph, three paragraphs, bulleted list, heading with text
+- German dummy text for German content, based on the record language from the site configuration
+- Icon in the toolbar and German/English labels
+- Restrict the button to application contexts (e.g. not in production) and backend user groups
 
 ### 2.0.0
 

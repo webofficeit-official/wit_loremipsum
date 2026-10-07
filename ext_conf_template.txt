@@ -1,0 +1,8 @@
+# cat=access; type=string; label=Allowed application contexts: Comma-separated list, e.g. "Development,Testing". Sub contexts like "Development/Local" are included. Leave empty to allow all contexts.
+allowedContexts =
+
+# cat=access; type=string; label=Allowed backend user groups: Comma-separated list of backend user group UIDs. Groups a user gets through subgroups count as well. Leave empty to allow all backend users.
+allowedBackendGroups =
+
+# cat=access; type=boolean; label=Always allow administrators: Administrators see the button regardless of their user groups. The application context restriction still applies.
+alwaysAllowAdmins = 1
